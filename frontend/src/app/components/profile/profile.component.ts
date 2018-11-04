@@ -14,6 +14,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProfileComponent {
   details: UserDetails;
+  loadingData = true;
   places = [];
   copyOfPlaces = [];
   searchedName = "";
@@ -30,12 +31,17 @@ export class ProfileComponent {
   }
 
   addNewPlace() {
-    this.dialog.open(AddNewPlaceDialog, {
+    const dialogRef = this.dialog.open(AddNewPlaceDialog, {
       width: '800px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getPlaceList();
     });
   }
 
   getPlaceList() {
+    this.loadingData = true;
     this.places = [];
     this.auth.placeList().subscribe(places => {
       var self = this;
@@ -46,6 +52,7 @@ export class ProfileComponent {
         self.places.push(place);
       });
 
+      this.loadingData = false;
       this.copyPlaces();
     }, (err) => {
     });
@@ -96,11 +103,8 @@ export class AddNewPlaceDialog {
     userId: ''
   };
 
-  fd = new FormData();
-
   constructor(public dialogRef: MatDialogRef<AddNewPlaceDialog>, 
-    private auth: AuthenticationService, 
-    private router: Router) {}
+    private auth: AuthenticationService) {}
 
   onCancel(): void {
     this.dialogRef.close();
@@ -111,19 +115,20 @@ export class AddNewPlaceDialog {
   }
 
   onSave(): void {
+    var fd = new FormData();
+
     this.placeDetails.userName = this.auth.getUserDetails().name;
     this.placeDetails.userId = this.auth.getUserDetails()._id;
     
-    this.fd.append('file', this.placeDetails.file, this.placeDetails.file.name);
-    this.fd.append('name', this.placeDetails.name);
-    this.fd.append('description', this.placeDetails.description);
-    this.fd.append('address', this.placeDetails.address);
-    this.fd.append('userName', this.placeDetails.userName);
-    this.fd.append('userId', this.placeDetails.userId);
+    fd.append('file', this.placeDetails.file, this.placeDetails.file.name);
+    fd.append('name', this.placeDetails.name);
+    fd.append('description', this.placeDetails.description);
+    fd.append('address', this.placeDetails.address);
+    fd.append('userName', this.placeDetails.userName);
+    fd.append('userId', this.placeDetails.userId);
 
-    this.auth.saveNewPlace(this.fd).subscribe(() => {
+    this.auth.saveNewPlace(fd).subscribe(() => {
       this.onCancel();
-      this.router.navigateByUrl('/profile');
     }, (err) => {
     });
   }
@@ -144,20 +149,25 @@ export class ViewPlaceDetailsDialog {
     imgBase64: ''
   };
 
+  loadingPlaceDetails = true;
+
   constructor(public dialogRef: MatDialogRef<ViewPlaceDetailsDialog>, 
     private auth: AuthenticationService, 
     public drive: DriveService,
     public _DomSanitizationService: DomSanitizer) { }
 
   ngOnInit() {
+    this.loadingPlaceDetails = true;
     this.auth.getPlaceDetail(this.drive.getPlaceId()).subscribe(place => {
       place.data.imgBase64 = this._DomSanitizationService.bypassSecurityTrustUrl('data:image/jpg;base64,' + place.data.imgBase64);
       this.placeDetail = place.data;
+      this.loadingPlaceDetails = false;
     },(err) => {
     });
   }
 
   onDone() {
+    this.loadingPlaceDetails = false;
     this.dialogRef.close();
   }
 }

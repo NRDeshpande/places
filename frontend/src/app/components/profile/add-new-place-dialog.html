@@ -2,15 +2,15 @@
 <div mat-dialog-content>
     <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
         <mat-form-field>
-            <input matInput placeholder="Place Name" type="text" [(ngModel)]="placeDetails.name">
+            <input matInput placeholder="Place Name" type="text" [(ngModel)]="placeDetails.name" required>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Place Description" type="text" [(ngModel)]="placeDetails.description">
+            <input matInput placeholder="Place Description" type="text" [(ngModel)]="placeDetails.description" required>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Place Address" type="text" [(ngModel)]="placeDetails.address">        
+            <input matInput placeholder="Place Address" type="text" [(ngModel)]="placeDetails.address" required>        
         </mat-form-field>
 
         <input placeholder="Upload File" type="file" (change)="onFileChanged($event)">     

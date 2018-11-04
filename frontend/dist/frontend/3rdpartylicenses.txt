@@ -330,12 +330,9 @@ THE SOFTWARE.
 
 @angular/material/dialog
 
-@angular/forms
-MIT
-
-@angular/material/card
-
 @angular/material/button
+
+@angular/material/snack-bar
 
 @angular/flex-layout
 MIT
@@ -568,6 +565,13 @@ THE SOFTWARE.
 
 
 @angular/material/form-field
+
+@angular/forms
+MIT
+
+@angular/material/progress-spinner
+
+@angular/material/card
 
 @angular/material/toolbar
 

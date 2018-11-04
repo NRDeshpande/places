@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../authentication.service';
 import { Router } from '@angular/router';
 
@@ -20,7 +20,7 @@ export class LoginComponent {
     this.auth.login(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/profile');
     }, (err) => {
-      console.error(err);
+      alert("Unauthorized: Access is denied due to invalid credentials");
     }); 
   }
 }

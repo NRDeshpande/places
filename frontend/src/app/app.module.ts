@@ -16,8 +16,9 @@ import { AuthenticationService } from './authentication.service';
 import { DriveService } from './drive.service';
 import { AuthGuardService } from './auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,7 +53,9 @@ const routes: Routes = [
     FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthenticationService, 

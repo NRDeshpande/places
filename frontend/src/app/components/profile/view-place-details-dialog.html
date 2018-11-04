@@ -1,9 +1,12 @@
 <h1 mat-dialog-title>View Place Details</h1>
 <div mat-dialog-content>
-    <mat-card class="example-card">
+    <div fxLayoutAlign="center">
+        <mat-spinner *ngIf="loadingPlaceDetails"></mat-spinner>
+    </div>
+    <mat-card class="example-card" *ngIf="!loadingPlaceDetails">
         <mat-card-header>
           <mat-card-title>{{placeDetail.name }}</mat-card-title>
-          <mat-card-subtitle>By: {{ placeDetail.userName }}</mat-card-subtitle>
+          <mat-card-subtitle>Add By: {{ placeDetail.userName }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="placeDetail.imgBase64">
         <mat-card-content>
