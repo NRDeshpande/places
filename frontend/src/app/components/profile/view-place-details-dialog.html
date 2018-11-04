@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>View Place Details</h1>
+<div mat-dialog-content>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{placeDetail.name }}</mat-card-title>
+          <mat-card-subtitle>By: {{ placeDetail.userName }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="placeDetail.imgBase64">
+        <mat-card-content>
+        <p> 
+            {{placeDetail.description }}
+        </p>
+        </mat-card-content>
+      </mat-card>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onDone()">Done</button>
+</div>

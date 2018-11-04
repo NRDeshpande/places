@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Add New Place</h1>
+<div mat-dialog-content>
+    <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <mat-form-field>
+            <input matInput placeholder="Place Name" type="text" [(ngModel)]="placeDetails.name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Place Description" type="text" [(ngModel)]="placeDetails.description">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Place Address" type="text" [(ngModel)]="placeDetails.address">        
+        </mat-form-field>
+
+        <input placeholder="Upload File" type="file" (change)="onFileChanged($event)">     
+    </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onSave()" cdkFocusInitial>Save</button>
+</div>

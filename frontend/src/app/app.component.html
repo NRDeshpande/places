@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">  
+    <mat-toolbar-row *ngIf="auth.isLoggedIn()">
+      <span><a routerLink="/profile">{{ auth.getUserDetails()?.name }}</a></span>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row *ngIf="!auth.isLoggedIn()">
+        <span><a routerLink="/login">Sign in</a></span>
+    </mat-toolbar-row>
+
+    <span class="fill-remaining-space"></span>
+
+    <mat-toolbar-row *ngIf="auth.isLoggedIn()">
+        <span><a (click)="auth.logout()">Logout</a></span>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+<router-outlet></router-outlet>
