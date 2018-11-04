@@ -74,9 +74,9 @@ export class AuthenticationService {
     let base;
 
     if (method === 'post') {
-      base = this.http.post('http://localhost:1234/api/'+`${type}`, data);
+      base = this.http.post('https://node.iamnikhil.com/api/'+`${type}`, data);
     } else {
-      base = this.http.get('http://localhost:1234/api/'+`${type}`, { headers: { Authorization: `Bearer ${this.getToken()}`, "Content-Type": "application/json" }});
+      base = this.http.get('https://node.iamnikhil.com/api/'+`${type}`, { headers: { Authorization: `Bearer ${this.getToken()}`, "Content-Type": "application/json" }});
     }
 
     const request = base.pipe(
