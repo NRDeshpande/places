@@ -7,6 +7,7 @@ var sendJSONresponse = function(res, status, content) {
     res.json(content);
 };
 
+// Function to create a new Place
 exports.create = function(request, response, next) {
     
     let place = new Place();
@@ -30,6 +31,7 @@ exports.create = function(request, response, next) {
     })
 };
 
+// Function to get place single details
 exports.getPlaceDetail = function(request, response, next) {
     Place.findById(request.params.id, function(error, place) {
         if(error) return next(error);
@@ -50,6 +52,7 @@ exports.getPlaceDetail = function(request, response, next) {
     })
 };
 
+// Function to get all places
 exports.getAllPlaces = function(request, response, next) {
     Place.find({}, function(error, places) {
         var placesData = [];
@@ -74,7 +77,7 @@ exports.getAllPlaces = function(request, response, next) {
     });
 };
 
-
+// Function to delete place
 exports.deletePlace = function(request, response, next) {
     Place.deleteOne({_id: new mongodb.ObjectID(request.body._id)}, function(error){
         if(error) return next(error);

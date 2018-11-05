@@ -4,6 +4,8 @@ var multer = require("multer");
 var jwt = require('express-jwt');
 var fs = require('fs')
 var ini = require('ini');
+
+// Reading the config file for jwt_secret
 var config = ini.parse(fs.readFileSync('/etc/places/config.ini', 'utf-8'));
 
 var auth = jwt({
@@ -23,17 +25,19 @@ const upload = multer({
   storage: storage
 })
 
+// Contollers
 var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 var ctrlPlace = require('../controllers/place');
 
-// profile
+// profile API
 router.get('/profile', auth, ctrlProfile.profileRead);
 
-// authentication
+// authentication API's
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
+// places API's (CURD)
 router.post('/saveNewPlace', upload.single('file'), ctrlPlace.create);
 router.get('/places', ctrlPlace.getAllPlaces);
 router.get('/placeDetail/:id', ctrlPlace.getPlaceDetail);

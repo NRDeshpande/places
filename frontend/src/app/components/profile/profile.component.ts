@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthenticationService, UserDetails, NewPlaceDetails } from '../../authentication.service';
 import { DriveService } from '../../drive.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 

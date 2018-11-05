@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 
-
+// Establish DB Connection
 require('../backend/models/db');
+
+// Authentication middleware
 require('../backend/config/passport');
 
+// API List
 var routesApi = require('../backend/routes/index');
 
 // Creating the Express Obj
@@ -30,7 +33,7 @@ app.use(function(req, res, next) {
 
 var port = 3000;
 app.listen(port, () => {
-    console.log("Sever is Running");
+    console.log("Node Sever is Running on Port: "+port);
 });
 
 module.exports = app;
